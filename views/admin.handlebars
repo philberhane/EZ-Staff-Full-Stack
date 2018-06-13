@@ -1,0 +1,33 @@
+
+ 
+ <h2 class="page-header">Admin Dashboard</h2>
+ <h3 id="orgName">{{organization}}</h3>
+<p>Welcome to your dashboard <span id="fullName">{{name}}</span>.</p> 
+<p>Please choose any of the following:</p>
+<button onclick="createEventForm()">Create Event</button>
+<button onclick="viewEvents()">View Events</button>
+<button onclick="editEvents()">Edit Events</button>
+<button onclick="inviteStaffForm()">Invite User</button>
+<div id="content"></div>
+<div id="server-response"></div>
+<div id="misc" > </div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Confirm</h3>
+    <p>Are you sure you would like to delete this event?</p>
+    <button id="closeButton">Close</button> <button onclick="deleteEvent()" id="confirmDelete">Delete Event</button>
+  </div>
+
+</div>
+
+<script type="text/javascript" src="/js/admin.js"> </script>
+
+
+
+    
