@@ -12,7 +12,9 @@
         
       
 
-
+document.getElementById('dashboard').setAttribute("href", "/users/staff")
+document.getElementById('dashboard2').setAttribute("href", "/users/staff")
+document.getElementById('logo').setAttribute("href", "/users/staff")
 
 
 function viewEvents() {

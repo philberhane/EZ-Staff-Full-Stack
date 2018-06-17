@@ -30,7 +30,11 @@ router.get('/loginError', function (req, res) {
 // Admin Dashboard
 router.get('/admin', function (req, res) {
     if (req.user) {
+        if (req.user.role === 'admin') {
 	res.render('admin', {name : req.user.name, organization: req.user.organization, plan: req.user.plan, email: req.user.email, expiration: req.user.expiration});
+        } else {
+            res.redirect('/users/staff')
+        }
     } else {
        res.render('login'); 
     }
@@ -39,7 +43,13 @@ router.get('/admin', function (req, res) {
 // Staff Dashboard
 router.get('/staff', function (req, res) {
     if (req.user) {
+        if (req.user.role === 'staff') {
+
 	res.render('staff', {name : req.user.name, organization: req.user.organization});
+        } else {
+            res.redirect('/users/admin')
+        }
+            
     } else {
        res.render('login'); 
     }
