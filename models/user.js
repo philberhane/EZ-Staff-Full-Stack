@@ -27,6 +27,9 @@ var UserSchema = mongoose.Schema({
     },
     expiration: {
         type: Date
+    },
+    reasonForLeaving : {
+        type: String
     }
 });
 

@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>LoginApp</title>
+	<title>Event Staffing Software</title>
 	<link rel="stylesheet" href="/css/bootstrap.css" />
 	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,19 +16,20 @@
 </head>
 <body>
 	<div class="container">
-      <div class="header clearfix">
+      <div class="headerTho clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
             {{#if user}}
-              <li role="presentation"><a href="/users/admin">Dashboard</a></li>
+             <li role="presentation" id="plansLi"></li>
+              <li id="dashboard" role="presentation"><a id="activeNav" href="/users/admin">Dashboard</a></li>
               <li role="presentation"><a href="/users/logout">Logout</a></li>
             {{else}}
               <li role="presentation"><a href="/users/login">Login</a></li>
-              <li role="presentation"><a href="/users/register">Register</a></li>
+              <li role="presentation"><a href="/users/register">Sign Up</a></li>
             {{/if}}
           </ul>
         </nav>
-        <h3 class="text-muted">LoginApp</h3>
+        <a class="navbar-brand"  href="/users/admin"><img src="/images/imageedit_6_9701024636.png" class= "img-responsive" style="height: 100%"></a>
       </div>
 
 
@@ -39,7 +44,7 @@
       </div>
 
       <footer class="footer">
-        <p>&copy; 2015 LoginApp, Inc.</p>
+        <p>&copy; 2018 EZ Staff.</p>
       </footer>
 
     </div> <!-- /container -->
