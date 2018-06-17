@@ -23,7 +23,7 @@ const register = () => {
     
     
 
-    fetch('http://localhost:3000/users/register', {
+    fetch('https://ezstaff.herokuapp.com/users/register', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
