@@ -32,7 +32,7 @@ function viewEvents() {
      }
     
     
-    fetch('http://localhost:3000/events/viewEvents', {
+    fetch('https://ezstaff.herokuapp.com/events/viewEvents', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -146,7 +146,7 @@ function viewYourEvents() {
      }
     
     
-    fetch('http://localhost:3000/events/viewEvents', {
+    fetch('https://ezstaff.herokuapp.com/events/viewEvents', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -371,7 +371,7 @@ if (status == google.maps.GeocoderStatus.OK) {
     }
 
     //If difference is less than 50 km, modify the array and make the api call
-    fetch('http://localhost:3000/events/checkInChanges', {
+    fetch('https://ezstaff.herokuapp.com/events/checkInChanges', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -481,7 +481,7 @@ if (status == google.maps.GeocoderStatus.OK) {
     }
 
     //If difference is less than 50 km, modify the array and make the api call
-    fetch('http://localhost:3000/events/checkInChanges', {
+    fetch('https://ezstaff.herokuapp.com/events/checkInChanges', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -537,7 +537,7 @@ function viewAvailableEvents() {
      }
     
     
-    fetch('http://localhost:3000/events/viewEvents', {
+    fetch('https://ezstaff.herokuapp.com/events/viewEvents', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -703,7 +703,7 @@ function acceptEvent(clicked_id) {
     
     
     
-    fetch('http://localhost:3000/events/eventStaffChanges', {
+    fetch('https://ezstaff.herokuapp.com/events/eventStaffChanges', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -739,7 +739,7 @@ function viewCancellableEvents() {
      }
     
     
-    fetch('http://localhost:3000/events/viewEvents', {
+    fetch('https://ezstaff.herokuapp.com/events/viewEvents', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -949,7 +949,7 @@ function cancelEvent() {
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
     
-    fetch('http://localhost:3000/events/eventStaffChanges', {
+    fetch('https://ezstaff.herokuapp.com/events/eventStaffChanges', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}

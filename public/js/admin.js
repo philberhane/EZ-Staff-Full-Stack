@@ -486,7 +486,7 @@ function createEvent() {
     
 
     
-    fetch('http://localhost:3000/events/createEvent', {
+    fetch('https://ezstaff.herokuapp.com/events/createEvent', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -528,7 +528,7 @@ function viewEvents() {
      }
     
     
-    fetch('http://localhost:3000/events/viewEvents', {
+    fetch('https://ezstaff.herokuapp.com/events/viewEvents', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -650,7 +650,7 @@ function editEvents() {
      }
     
     
-    fetch('http://localhost:3000/events/viewEvents', {
+    fetch('https://ezstaff.herokuapp.com/events/viewEvents', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -1061,7 +1061,7 @@ function makeChanges(clicked_id) {
    // console.log(`The input is ${input}`)
     
     
-    fetch('http://localhost:3000/events/editEvent', {
+    fetch('https://ezstaff.herokuapp.com/events/editEvent', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -1123,7 +1123,7 @@ function deleteEvent() {
     modal.style.display = "none";
     
     
-    fetch('http://localhost:3000/events/deleteEvent', {
+    fetch('https://ezstaff.herokuapp.com/events/deleteEvent', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -1194,7 +1194,7 @@ function inviteStaff() {
         email : email
     }
     
-    fetch('http://localhost:3000/users/inviteStaff', {
+    fetch('https://ezstaff.herokuapp.com/users/inviteStaff', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -1294,7 +1294,7 @@ function removeStaff() {
     var modal = document.getElementById('myModal3');
     modal.style.display = "none";
     
-    fetch('http://localhost:3000/events/eventStaffChanges', {
+    fetch('https://ezstaff.herokuapp.com/events/eventStaffChanges', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -1361,7 +1361,7 @@ var organization = document.getElementById('orgName').innerText
     }
     
     
-    fetch('http://localhost:3000/users/findUsers', {
+    fetch('https://ezstaff.herokuapp.com/users/findUsers', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -1467,7 +1467,7 @@ function addStaff(clicked_id) {
     var modal = document.getElementById('myModal2');
     modal.style.display = "none";
     
-    fetch('http://localhost:3000/events/eventStaffChanges', {
+    fetch('https://ezstaff.herokuapp.com/events/eventStaffChanges', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
@@ -1599,7 +1599,7 @@ function beginMembership() {
         console.log(input)
         
         
-        fetch("http://localhost:3000/users/changeMembership", {
+        fetch("https://ezstaff.herokuapp.com/users/changeMembership", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(input)
@@ -1704,7 +1704,7 @@ function updateCard() {
         console.log(input)
         
         
-        fetch("http://localhost:3000/users/updateCard", {
+        fetch("https://ezstaff.herokuapp.com/users/updateCard", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(input)
@@ -1791,7 +1791,7 @@ function changePlan() {
         console.log(input)
         
         
-        fetch("http://localhost:3000/users/changeMembership", {
+        fetch("https://ezstaff.herokuapp.com/users/changeMembership", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(input)
@@ -1892,7 +1892,7 @@ function cancelPlan() {
     console.log(input)
     
     
-    fetch("http://localhost:3000/users/cancelMembership", {
+    fetch("https://ezstaff.herokuapp.com/users/cancelMembership", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(input)
