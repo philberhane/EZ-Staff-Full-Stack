@@ -1,16 +1,3 @@
-<h2 class="page-header" id="signupheader">Sign Up</h2>
-<h4 id="signupmessage">*Start your 14 day Free Trial today! No credit card needed.</h4>
-{{#if user}}
-        <div class="alert alert-danger">Username has taken already try new</div> 
-{{/if}}
-{{#if mail}}
-        <div class="alert alert-danger">Email has taken already try new</div> 
-{{/if}} 
-{{#if errors}}
-      {{#each errors}}
-        <div class="alert alert-danger">{{msg}}</div>
-      {{/each}}
-{{/if}}
 <div>
    <div class="form-group">
     <label>Name</label>
@@ -24,10 +11,7 @@
     <label>Email</label>
     <input type="email" class="form-control" placeholder="Email" id="email" name="email">
   </div>
-  <div class="form-group">
-    <label>Organization Name</label>
-    <input type="text" class="form-control" placeholder="Organization" id="organization" name="organization">
-  </div>
+  
   <div class="form-group">
     <label>Password</label>
     <input type="password" class="form-control" placeholder="Password" id="password" name="password">
@@ -42,4 +26,4 @@
 <p id="server-response"></p>
 
 
-    <script type="text/javascript" src="/js/signup.js"> </script>
+    <script type="text/javascript" src="/js/staffsignup.js"> </script>

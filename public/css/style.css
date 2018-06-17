@@ -4,6 +4,18 @@ body {
   padding-bottom: 20px;
 }
 
+#loginbutton:hover {
+    color: white;
+}
+
+#createeventbutton:hover {
+    color: white;
+}
+
+#inviteButton:hover {
+        color: white;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -156,8 +168,54 @@ footer{
  list-style-type: none;
 }
 
+#misc {
+    display: none;
+}
+
 /* The Modal (background) */
 .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    text-align: center;
+}
+
+.modal2 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    text-align: center;
+}
+
+.modal3 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    text-align: center;
+}
+
+.stripeModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -195,10 +253,302 @@ footer{
     cursor: pointer;
 }
 
-#confirmDelete {
-    margin-left: 150px;
+
+.stripeClose {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-#misc {
+.stripeClose:hover,
+.stripeClose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* The Close Button */
+.close2 {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close2:hover,
+.close2:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* The Close Button */
+.changePlanClose {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.changePlanClose:hover,
+.changePlanClose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* The Close Button */
+.close3 {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close3:hover,
+.close3:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* The Close Button */
+.close1 {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close1:hover,
+.close1:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* The Close Button */
+.cancelPlanClose {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.cancelPlanClose:hover,
+.cancelPlanClose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* The Close Button */
+.confirmCancelPlanClose {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.confirmCancelPlanClose:hover,
+.confirmCancelPlanClose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+.hidden {
     display: none;
+}
+
+.removeStaffSpan {
+    float: right;
+    margin-top: -10px;
+}
+
+.addButton {
+    margin-left: 25px;
+
+}
+
+.liAdd {
+    margin-top: 25px;
+}
+
+
+#search-results {
+    list-style-type: none;
+}
+
+#close2 {
+    margin-top: 25px;
+}
+
+
+
+.StripeElement, #stripeName {
+  background-color: white;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+
+
+
+#stripeButton {
+    margin-top: 15px;
+}
+
+#stripePurchase {
+    margin-top: 15px;
+}
+
+
+
+#stripeName {
+color: #32325d;
+    line-height: 18px;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+
+    
+}
+
+::placeholder {
+      color: #DCDFE6;
+    }
+
+.StripeElement {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.form-row {
+    margin-top: 10px;
+}
+
+#card-errors {
+    color: #fa755a;
+}
+
+#loginError {
+    color: #fa755a;
+}
+
+#content {
+    margin-top: 25px;
+}
+
+.btnRed {
+   background-color: red;
+    color: white; 
+}
+
+.btnRed:hover {
+   background-color: red;
+    color: white; 
+}
+
+.btnOrange {
+   background-color: orange;
+    color: white;  
+}
+
+.btnOrange:hover {
+   background-color: orange;
+    color: white;  
+}
+
+.btnBlue {
+    background-color: #4EBBDB;
+    color: white; 
+}
+
+.btnBlue:hover {
+    background-color: #4EBBDB;
+    color: white; 
+}
+
+
+
+.nav-tabs li a{
+   color: black; 
+}
+.nav-pills li a{
+   color: #C1C1C1; 
+}
+
+
+#activeNav { 
+color: black;
+    background-color: transparent;
+}
+
+#activeNav:active { 
+color: black;
+    background-color: transparent;
+}
+
+
+
+.activeNav { 
+color: black;
+}
+
+#createeventbutton {
+    margin-top: 25px;
+}
+
+.blue {
+    background-color: #4EBBDB;
+    color: white;
+    font-size: 25px;
+}
+
+.deleteButton {
+    margin-top: 10px;
+}
+
+.addStaffButton {
+    margin-top: 10px;
+}
+
+.inviteButton {
+    margin-top: 15px;
+}
+
+.makeChangesButton {
+    margin-top: 15px;
+}
+
+a {
+    text-decoration: none;
+}
+
+#signupmessage {
+    color: #909090;
+}
+
+#signupmessage, #signupheader {
+    text-align: center;
 }

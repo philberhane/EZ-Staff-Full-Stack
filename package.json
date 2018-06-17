@@ -29,6 +29,7 @@
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
-    "strategy": "^1.1.1"
+    "strategy": "^1.1.1",
+    "stripe": "^6.1.1"
   }
 }

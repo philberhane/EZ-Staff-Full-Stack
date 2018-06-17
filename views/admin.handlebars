@@ -1,16 +1,20 @@
-
+<div id="adminbody">
  
  <h2 class="page-header">Admin Dashboard</h2>
+ 
  <h3 id="orgName">{{organization}}</h3>
 <p>Welcome to your dashboard <span id="fullName">{{name}}</span>.</p> 
 <p>Please choose any of the following:</p>
-<button onclick="createEventForm()">Create Event</button>
-<button onclick="viewEvents()">View Events</button>
-<button onclick="editEvents()">Edit Events</button>
-<button onclick="inviteStaffForm()">Invite User</button>
+<ul class="nav nav-tabs">
+    <li id ="createEventLi"><a href="#"  onclick="createEventForm()">Create Event</a></li>
+<li id ="viewEventsLi"><a href="#" onclick="viewEvents()">View Events</a></li>
+<li id ="editEventsLi"><a href="#" onclick="editEvents()">Edit Events</a></li>
+<li id ="inviteStaffLi"><a href="#" onclick="inviteStaffForm()">Invite User</a></li>
+    </ul>
 <div id="content"></div>
 <div id="server-response"></div>
 <div id="misc" > </div>
+
 
 
 <!-- Modal -->
@@ -18,15 +22,135 @@
 
   <!-- Modal content -->
   <div class="modal-content">
-    <span class="close">&times;</span>
+    <span class="close1">&times;</span>
     <h3>Confirm</h3>
     <p>Are you sure you would like to delete this event?</p>
-    <button id="closeButton">Close</button> <button onclick="deleteEvent()" id="confirmDelete">Delete Event</button>
+    <button id="closeButton" class="btn btn-default">Close</button> <button onclick="deleteEvent()" id="confirmDelete" class="btn btnRed">Delete Event</button>
   </div>
 
 </div>
 
+<div id="myModal2" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close2">&times;</span>
+    <h3>Add Staff to Event</h3>
+    <p>Please choose staff member you would like to add to this event:</p>
+    <div><ul id = "search-results"></ul></div>
+     <button id="close2" class="btn btn-default">Close</button>
+  </div>
+
+</div>
+
+<div id="myModal3" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close3">&times;</span>
+    <h3>Confirm</h3>
+    <p>Are you sure you would like to remove this staff member from the event?</p>
+    <p id="staffRemove"></p>
+    <button id="closeRemoveStaff" class="btn btn-default">Close</button> <button id="removeStaff" onclick="removeStaff()" id="confirmDelete" class="btn btnRed">Remove</button>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+</div>
+<!-- Modal -->
+<div id="cancelPlanModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="cancelPlanClose">&times;</span>
+    <h3>Confirm</h3>
+    <p>Are you sure you would like to cancel your plan with us?</p>
+    <button id="cancelPlanCloseButton" class="btn btn-default">Close</button> <button onclick="confirmCancelPlanPopup()" id="cancelPlan" class="btn btnRed">Cancel Plan</button>
+  </div>
+
+</div>
+
+    <!-- Modal -->
+<div id="confirmCancelPlanModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="confirmCancelPlanClose">&times;</span>
+    <h3>Hate to see you leave..</h3>
+    <p>Would you mind leaving us a quick reason as to why you're leaving? Perhaps something we can improve?</p>
+    <input id="cancelReason">
+    <button id="confirmCancelPlanCloseButton" class="btn btn-default">Close</button> <button onclick="cancelPlan()" id="confirmCancelPlan" class="btn btn-default">Submit</button>
+  </div>
+
+</div>
+<div id="changePlanModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="changePlanClose">&times;</span>
+    <h3>Confirm</h3>
+    <p>Please confirm that you would like to change your current plan to the following:</p>
+    <p id="newPlan"></p>
+    <button id="changePlanCloseButton" class="btn btn-default">Close</button> <button id="removeStaff" onclick="changePlan()" id="changePlanButton" class="btn btnBlue">Confirm</button>
+  </div>
+
+</div>
+<div id ="stripeModal" class="stripeModal">
+   <div class="col-md-4"></div>
+    
+    <div class="modal-content col-md-4 col-sm-12">
+        <span class="stripeClose">&times;</span>
+        <div id="payment-form">
+<h3>Please enter the following:</h3>
+    <div class="form-row form-group" >
+    <label>Full Name (as it appears on your credit card)</label>
+    </div>
+  <div class="form-row" form-group>
+   <input class="form-control" id="stripeName" placeholder= "Name">
+     </div>
+  <div class="form-row">
+    <label for="card-element">
+      Credit or debit card
+    </label>
+    <div id="card-element">
+      <!-- A Stripe Element will be inserted here. -->
+      
+    </div>
+
+    <!-- Used to display form errors. -->
+    <div id="card-errors" role="alert"></div>
+  </div>
+    
+    <p id="stripePurchase"></p>
+  <button id="stripeButton" class="btn btnBlue"></button>
+  
+  
+  <div id="server-response" role="alert">
+      
+  </div>
+</div>
+        
+    </div>
+</div>
+
+<input style="display:none" id="role" value="admin">
+ <input style="display:none" id="hiddenPlan" value="{{plan}}">
+ <input style="display:none" id="hiddenEmail" value="{{email}}">
+ <input style="display:none" id="hiddenName" value="{{name}}">
+ <input style="display:none" id="expirationDate" value="{{expiration}}">
+ <input style="display:none" id="upgradePlanValue">
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript" src="/js/admin.js"> </script>
+<script type="text/javascript" src="/js/trialExpired.js"> </script>
+
 
 
 

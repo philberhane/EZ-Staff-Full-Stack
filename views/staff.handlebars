@@ -1,2 +1,37 @@
- <h2 class="page-header">Dashboard</h2>
-<p>Welcome to your dashboard</p>  
+<h2 class="page-header">Staff Member Dashboard</h2>
+ <h3 id="orgName">{{organization}}</h3>
+ <input style="display:none" id="role" value="staff">
+<p>Welcome to your dashboard <span id="fullName">{{name}}</span>.</p>
+<button id="hiddenName" style="display:none" value="{{name}}"></button>
+<p>Please choose any of the following:</p>
+<ul class="nav nav-tabs">
+<li id ="allEventsLi"><a href="#" onclick="viewEvents()">All Events</a></li>
+<li id ="availableEventsLi"><a href="#" onclick="viewAvailableEvents()">Available Events</a></li>
+<li id ="yourEventsLi"><a href="#" onclick="viewYourEvents()">Your Events</a></li>
+<li id ="cancelEventLi"><a href="#" onclick="viewCancellableEvents()">Cancel Event</a></li>
+</ul>
+<div id="content"></div>
+<div id="server-response"></div>
+<div id="misc" > 
+<p>TEST</p>
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Confirm</h3>
+    <p>Are you sure you would like to cancel this event?</p>
+    <button id="closeButton" class="btn btn-default">Close</button> <button onclick="cancelEvent()" id="confirmCancel" class="btn btnRed">Cancel Event</button>
+  </div>
+
+</div>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyARFfy8e5YPQHD5xS_9VP4N1PYCHXsI5Xc&callback=initMap">
+    </script>
+
+<script type="text/javascript" src="/js/staff.js"> </script>

@@ -6,6 +6,10 @@ var nodemailer = require('nodemailer');
 
 var Event = require('../models/event');
 
+// To see whether a user is checked in or not
+var User = require('../models/user');
+
+
 
 
 router.post('/createEvent', function (req, res) {
@@ -40,6 +44,46 @@ router.post('/createEvent', function (req, res) {
 		});
 	}
 	else {
+        
+    var emailArray = []
+    
+    User.find({ 'organization': req.body.organization, 'role': 'staff'},  (err, arrayOfUsers) => {
+            if (err) {
+                return handleError(err);
+            }
+        
+        if (arrayOfUsers.length > 0) {
+            
+        
+            for (i=0; i<arrayOfUsers.length; i++) {
+                emailArray.push(arrayOfUsers[i].email)
+            }
+        // Email functions goes here
+        var transporter = nodemailer.createTransport({
+  host: process.env.HOST,
+    port: 465,
+    secure: true,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASS
+  }
+});
+        console.log(emailArray)
+
+var mailOptions = {
+  from: process.env.EMAIL,
+  to: emailArray,
+  subject: "An Event has been created!",
+  html: '<p>A new event has been added and is ready for staff members!. Click <a href="http:/localhost:3000/users/login">here</a> to sign in and accept the event!</p>'
+};
+        transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+      console.log('Emails Sent!')
+  }
+});
+    }    })
     
     
     event.save( (err, model) => {
@@ -73,6 +117,13 @@ router.post('/viewEvents', function (req, res) {
             
         })
 })
+
+
+
+
+
+
+
 
 
 router.post('/editEvent', function (req, res) {
@@ -130,6 +181,117 @@ router.post('/editEvent', function (req, res) {
 })
 
 
+router.post('/eventStaffChanges', function (req, res) {
+    var id = req.body.id;
+    var staffed = req.body.staffed;
+    var role = req.body.role
+    
+    if (role === 'staff') {
+    
+    
+    var original = req.body.original
+    var user = req.body.user
+    var organization = req.body.organization
+    if (original > staffed) {
+        console.log('A Staff Member has cancelled an event')
+        console.log(organization)
+        User.find({ 'organization': organization},  (err, arrayOfUsers) => {
+            if (err) {
+                return handleError(err);
+            }
+            
+            var emailArray = []
+        
+        if (arrayOfUsers.length > 0) {
+            
+            
+        
+            for (i=0; i<arrayOfUsers.length; i++) {
+                if (arrayOfUsers[i].name !== user) {
+                emailArray.push(arrayOfUsers[i].email)
+                }
+            }
+            
+        // Email functions goes here
+        var transporter = nodemailer.createTransport({
+  host: process.env.HOST,
+    port: 465,
+    secure: true,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASS
+  }
+});
+        
+
+var mailOptions = {
+  from: process.env.EMAIL,
+  to: emailArray,
+  subject: "A Staff Member has cancelled an event!",
+  html: '<p>This means that, if you are a staff member, an event is available to accept. Click <a href="http:/localhost:3000/users/login">here</a> to sign in and accept the event!</p>'
+};
+        transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+      console.log('Emails Sent!')
+  }
+});
+    }    })
+        
+        
+        
+        
+        
+        
+    } else {
+        console.log('A Staff Member has accepted an event')
+        User.findOne({ organization: req.body.organization, role: 'admin'},  (err, adminUser) => {
+            if (err) {
+                return handleError(err);
+            }
+            
+            
+        // Email functions goes here
+        var transporter = nodemailer.createTransport({
+  host: process.env.HOST,
+    port: 465,
+    secure: true,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASS
+  }
+});
+
+var mailOptions = {
+  from: process.env.EMAIL,
+  to: adminUser.email,
+  subject: "An Event has been accepted!",
+  html: '<p>A staff member has accepted an event!. Click <a href="http:/localhost:3000/users/login">here</a> to sign in and see who is currently staffed!</p>'
+};
+        transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+      console.log('Emails Sent!')
+  }
+});
+        })
+        
+        
+        
+        
+        
+    } }
+    
+    Event.update({_id: id}, {
+    staffed: staffed  
+}, function(err, affected, resp) {
+   //console.log(resp);
+})
+    
+})
+
 
 
 
@@ -141,6 +303,67 @@ Event.findByIdAndRemove(req.body.id, function (err, user) {
         throw err;
     
 })  
+})
+
+
+router.post('/checkInChanges', function (req, res) {
+    var id = req.body.id;
+    var checkIn = req.body.checkIn;
+    var user = req.body.user
+    var checkInStatus = req.body.checkInStatus
+    
+    User.findOne({ organization: req.body.organization, role: 'admin'},  (err, adminUser) => {
+            if (err) {
+                return handleError(err);
+            }
+            
+            
+        // Email functions goes here
+        var transporter = nodemailer.createTransport({
+  host: process.env.HOST,
+    port: 465,
+    secure: true,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASS
+  }
+});
+        
+    if (checkInStatus === 'Checking in') {
+
+var mailOptions = {
+  from: process.env.EMAIL,
+  to: adminUser.email,
+  subject: "An Event has been checked into!",
+  text: user + ' has checked into an event!'
+}; 
+    } else {
+         var mailOptions = {
+  from: process.env.EMAIL,
+  to: adminUser.email,
+  subject: "An Event has been checked out of!",
+  text: user + ' has checked out of an event!'
+};   
+            
+            
+        }
+        transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+      console.log('Emails Sent!')
+  }
+});
+        })
+    
+    
+    
+    Event.update({_id: id}, {
+    checkIn: checkIn  
+}, function(err, affected, resp) {
+   //console.log(resp);
+})
+    
 })
 
 

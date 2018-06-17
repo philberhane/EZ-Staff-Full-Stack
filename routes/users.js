@@ -6,9 +6,40 @@ var nodemailer = require('nodemailer');
 
 var User = require('../models/user');
 
-// Register
+// Register for Admin
 router.get('/register', function (req, res) {
 	res.render('register');
+});
+
+
+/*router.get('/:id', function(req, res) {
+    User.findOne({ '_id': req.params.id },  (err, urlObject) => {
+            if (err) {
+                return handleError(err);
+            }
+            
+            if (urlObject.verified === 'no') {
+                
+                if (urlObject.role === 'admin') {
+                    
+                }
+                
+                
+                
+                
+            } else {
+                res.status(500).send({
+			message: 'Error: This user is already verified!'
+		});
+            }
+            
+        })
+    
+})*/
+
+// Register for Staff Members
+router.get('/staffRegister', function (req, res) {
+	res.render('staffRegister');
 });
 
 // Login
@@ -16,10 +47,15 @@ router.get('/login', function (req, res) {
 	res.render('login');
 });
 
+// Login Error
+router.get('/loginError', function (req, res) {
+	res.render('loginError');
+});
+
 // Admin Dashboard
 router.get('/admin', function (req, res) {
     if (req.user) {
-	res.render('admin', {name : req.user.name, organization: req.user.organization});
+	res.render('admin', {name : req.user.name, organization: req.user.organization, plan: req.user.plan, email: req.user.email, expiration: req.user.expiration});
     } else {
        res.render('login'); 
     }
@@ -27,8 +63,33 @@ router.get('/admin', function (req, res) {
 
 // Staff Dashboard
 router.get('/staff', function (req, res) {
-	res.render('staff');
+    if (req.user) {
+	res.render('staff', {name : req.user.name, organization: req.user.organization});
+    } else {
+       res.render('login'); 
+    }
 });
+
+
+router.get('/test', function (req, res) {
+    
+    var emailArray = []
+    
+    User.find({ 'organization': 'Shift Media Management LLC Operations', 'role': 'staff'},  (err, arrayOfUsers) => {
+            if (err) {
+                return handleError(err);
+            }
+            
+        
+            for (i=0; i<arrayOfUsers.length; i++) {
+                emailArray.push(arrayOfUsers[i].email)
+            }
+        console.log(emailArray)
+        // Email functions goe here
+        })
+    
+    
+})
 
 // Register User
 router.post('/register', function (req, res) {
@@ -97,7 +158,8 @@ router.post('/register', function (req, res) {
                         organization: organization,
                         role: role,
                         expiration: expiration,
-						password: password
+						password: password,
+                        plan : "Free"
 					});
 					User.createUser(newUser, function (err, user) {
 						if (err) throw err;
@@ -144,18 +206,15 @@ passport.deserializeUser(function (id, done) {
 });
 
 router.post('/login',
-	passport.authenticate('local', { failureRedirect: '/users/login', failureFlash: true }), function (req, res) {
+	passport.authenticate('local', { failureRedirect: '/users/loginError', failureFlash: true, message : 'test' }), function (req, res) {
         var today = new Date();
-        if (req.user.role === 'admin' && today >= req.user.expiration) {
-            res.status(500).send({
-			             message: 'Error: Your Free Trial has ended! Please upgrade to continue using EZ Staff.'
-		              });
-        } else {
+         if (req.user.role === 'admin') {
                 
                res.redirect('/users/admin')
-            console.log(req.user)
            
         
+        } else {
+            res.redirect('/users/staff')
         }
 	});
 
@@ -177,7 +236,7 @@ var recipient = req.body.recipient
 var organization = req.body.organization
 
 var transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: process.env.HOST,
     port: 465,
     secure: true,
   auth: {
@@ -187,10 +246,10 @@ var transporter = nodemailer.createTransport({
 });
 
 var mailOptions = {
-  from: 'philberhane7@gmail.com',
+  from: process.env.EMAIL,
   to: recipient,
   subject: "You've been invited to EZ Staff",
-  text: 'That was easy!'
+  html: '<p>EZ Staff is the leading Event Staffing Software. Click <a href="http:/localhost:3000/staffsignup">here</a> to get started!</p>'
 };
     
 //Insert field checks
@@ -219,7 +278,35 @@ var mailOptions = {
 		              });
                     } else {
 
-
+User.findOne({ email: req.body.email}, function (err, admin) {
+    
+    let allowedUsers
+    
+    if (admin.plan === 'Free') {
+        allowedUsers = 5
+    }
+    
+    if (admin.plan === 'Small') {
+        allowedUsers = 5
+    }
+    
+    if (admin.plan === 'Medium') {
+        allowedUsers = 20
+    }
+    
+    User.find({ 'organization': req.body.organization, 'role': 'staff'},  (err, arrayOfUsers) => {
+        if (err) {
+                return handleError(err);
+            }
+    
+        if (arrayOfUsers.length >= allowedUsers) {
+            
+           res.status(500).send({
+                message: 'Error: Your current plan does not allow you to invite any more staff members! Please upgrade your plan if you wish to invite more'
+                })  
+        }
+    else {
+    
 transporter.sendMail(mailOptions, function(error, info){
   if (error) {
     console.log(error);
@@ -241,8 +328,351 @@ transporter.sendMail(mailOptions, function(error, info){
 
             }
 });
-        } })
+    
     }
+    })
+    
+    
+    
+    
+                    })    } }) }
+    
+    
+})
+
+
+
+router.post('/staffRegister', function (req, res) {
+    
+var name = req.body.name;
+	var email = req.body.email;
+	var username = req.body.username;
+	var password = req.body.password;
+	var password2 = req.body.password2;
+ //   var organization = req.body.organization;
+
+	// Validation
+	req.checkBody('name', 'Name is required!').notEmpty();
+	req.checkBody('email', 'Email is required!').notEmpty();
+	req.checkBody('email', 'Email is not valid!').isEmail();
+	req.checkBody('username', 'Username is required!').notEmpty();
+//    req.checkBody('organization', 'Organization is required!').notEmpty();
+	req.checkBody('password', 'Password is required!').notEmpty();
+	req.checkBody('password2', 'Passwords do not match!').equals(req.body.password);
+
+	var errors = req.validationErrors();
+
+	if (errors) {
+        console.log(errors)
+		res.status(500).send({
+			message: 'Error: ' + errors[0].msg
+		});
+	}
+	else {
+		//checking for email and username are already taken
+		
+			User.findOne({ email: { 
+				"$regex": "^" + email + "\\b", "$options": "i"
+		}}, function (err, mail) {
+
+    
+                    if (!mail) {
+                        res.status(500).send({
+			             message: `Error: You haven't been invited to the application!`
+		              });
+                    } else if (mail.password) {
+                        
+                        res.status(500).send({
+			             message: `Error: This user already exists!!`
+		              });
+                    }  else {
+                        var email = mail.email
+                        var organization = mail.organization
+                        var role = mail.role
+                        
+                        mail.remove({email: email}, function (err) {
+    // if no error, your models are removed
+});
+                        
+                        var newUser = new User({
+						name: name,
+						email: email,
+						username: username,
+                        organization: organization,
+                        role: role,
+						password: password
+					});
+					User.createUser(newUser, function (err, user) {
+						if (err) throw err;
+						console.log(user);
+					});
+         	res.status(200).send({
+                message: 'You have successfully signed up! Please <a href="/users/login">Login</a> to continue.'
+                })
+                        
+                        
+                    }
+                
+				
+				
+ 
+    })
+ }
+})
+
+
+
+router.post('/findUsers', function (req, res) {
+    User.find({ 'organization': req.body.organization, 'role': 'staff'},  (err, arrayOfUsers) => {
+            if (err) {
+                return handleError(err);
+            }
+        
+        if (arrayOfUsers.length === 0) {
+            res.status(500).send({
+			message: 'Error: There are no staff members to add! Change this by inviting a staff member to this app'
+		});
+        }
+            else {
+        res.status(201).send({
+            message: arrayOfUsers
+        })
+            }
+            
+        })
+} )
+
+
+
+router.post('/changeMembership', function (req, res) {
+    const stripe = require("stripe")(process.env.STRIPE_PRIVATE_API);
+  
+    
+    var email = req.body.email
+    var plan = req.body.plan
+    var previousPlan = req.body.previousPlan
+    
+    
+    stripe.plans.list(
+  { limit: 3 },
+  function(err, plans) {
+
+  var enterprise = plans.data[0]
+  var medium = plans.data[1]
+  var small = plans.data[2]
+  
+  let desiredPlan;
+      
+      for (i=0;i<plans.data.length;i++) {
+          if (plans.data[i].nickname === plan) {
+              desiredPlan = plans.data[i].id
+          }
+      }
+      
+      console.log(desiredPlan)
+  
+  
+  
+    
+    
+    
+    
+    if (previousPlan === 'Free') {
+        var token = req.body.token
+    
+    stripe.customers.create({
+   source: token,
+    email: email
+ }, function(err, customer) {
+
+    stripe.subscriptions.create({
+  customer: customer.id,
+  items: [
+    {
+      plan: desiredPlan
+    }
+  ]
+}, function(err, subscription) {
+    // asynchronously called
+  }
+);
+    
+    });
+        
+    } else {
+        
+        stripe.customers.list(
+        { email: req.body.email },
+        function(err, customers) {
+            const customerId = customers.data[0].id
+        
+            stripe.subscriptions.list(
+            { customer: customerId },
+            function(err, subscriptions) {
+                // asynchronously called
+            var subscription = subscriptions.data[0].id
+                
+                stripe.subscriptionItems.list(
+  { subscription: subscriptions.data[0].id },
+  function(err, subscriptionItems) {
+    // asynchronously called
+      var subscriptionItem = subscriptionItems.data[0].id
+
+            
+            stripe.subscriptionItems.update(
+ subscriptionItem,
+  {
+    plan: desiredPlan,
+  },
+  function(err, subscriptionItem) {
+    // asynchronously called
+  }
+);
+                  }
+);
+                
+});
+            
+        })
+        
+    } }
+);
+
+    User.update({email: email}, {
+    plan: plan  
+}, function(err, affected, resp) {
+   //console.log(resp);
+})
+})
+
+
+router.post('/updateCard', function (req, res) {
+    const stripe = require("stripe")(process.env.STRIPE_PRIVATE_API);
+        
+    
+    /* STEP ONE:
+    Retrieve the Customer's ID from Stripe's database using their email. 
+    */   
+    stripe.customers.list(
+        { email: req.body.email },
+        function(err, customers) {
+            const customerId = customers.data[0].id
+       
+            
+            
+            /*STEP TWO:
+            Use Customer ID to retreive the Credit Card ID
+            */
+            stripe.customers.listCards(
+                customerId, function(err, cards) {
+
+                /*This "if" statement basically says to check if the user
+                has a card on file. If so, continue to update it. If not,
+                then send the message 'You dont have a card on file'
+                */
+                 if (cards.data[0]) {
+                    
+                    const cardId = cards.data[0].id
+                
+               
+                
+                   /* STEP THREE:
+                    Use both the Customer ID and Credit Card ID to Delete the Credit Card
+                    */  
+                    stripe.customers.deleteCard(
+                        customerId,
+                        cardId,
+                        function(err, confirmation) {
+                            }
+                            );
+                    
+                     
+                    /* STEP FOUR:
+                    Add a new Credit Card using the tokenized information, thus completing our update
+                    */
+                    stripe.customers.createSource(
+                        customerId,
+                        { card: req.body.token },
+                        function(err, card) {
+                            res.status(201).send({ 
+                                message: 'Success: The card has been successfully updated!!'
+                                })
+                        }
+                        );
+                    
+                    
+                } else {
+                    res.status(500).send({
+                        message: 'Error: You do not have a card on file to update!'
+                            })
+                       }
+                    
+        })
+    })   
+    
+})
+
+
+
+
+
+router.post('/cancelMembership', function (req, res) {
+    
+    var email = req.body.email
+    
+    var stripe = require("stripe")(
+  process.env.STRIPE_PRIVATE_API
+);
+    
+    stripe.customers.list(
+        { email: req.body.email },
+        function(err, customers) {
+            const customerId = customers.data[0].id
+            
+        
+            stripe.customers.del( customerId,
+  function(err, confirmation) {
+    // asynchronously called
+  }
+);
+            
+        })
+        
+    
+
+    User.update({email: email}, {
+    plan: 'Free',
+    reasonForLeaving : req.body.reasonForLeaving
+}, function(err, affected, resp) {
+   //console.log(resp);
+})
+
+
+    
+})
+
+
+router.get('/listSubscriptions', function (req, res) {
+    console.log(process.env.STRIPE_PRIVATE_API)
+    var stripe = require("stripe")(
+  process.env.STRIPE_PRIVATE_API
+);
+    
+    stripe.subscriptions.list(
+  { customer: 'cus_D3fRquHb5JRl2c' },
+  function(err, subscriptions) {
+  // asynchronously called
+      stripe.subscriptionItems.list(
+  { subscription: subscriptions.data[0].id },
+  function(err, subscriptionItems) {
+    // asynchronously called
+      console.log(subscriptionItems.data[0].id)
+  }
+);
+});
+    
+
+    
     
 })
 

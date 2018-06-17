@@ -27,6 +27,9 @@ var EventSchema = new mongoose.Schema({
     },
     staffed: {
         type: Array
+    },
+    checkIn: {
+        type: Array
     }
 });
 
