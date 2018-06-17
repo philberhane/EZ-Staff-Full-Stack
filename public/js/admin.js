@@ -326,6 +326,7 @@ function createEventForm() {
     const contentSelector = document.getElementById('content')
     
     contentSelector.innerHTML = ''
+    
      document.getElementById('server-response').innerHTML = ''
     
     if (document.querySelector('.active')) {
@@ -354,10 +355,10 @@ function createEventForm() {
         const divCol2 = document.createElement('div')
         divCol2.className = 'form-group col-md-6 col-sm-12'
         const date = document.createElement('input')
-        date.type = 'date'
+        date.type = 'text'
         date.className = 'form-control'
         date.id = 'date'
-        date.placeholder = 'Enter the date of the event'
+        date.placeholder = 'mm/dd/yyyy'
         const dateLabel = document.createElement('label')
         dateLabel.innerHTML = 'Date'
         divCol2.appendChild(dateLabel)
@@ -879,7 +880,7 @@ selectedAreaDiv.appendChild(selectedArea)
         date.className = 'form-control'
         date.id = 'date'
 
-        date.placeholder = 'Enter the date of the event'
+        date.placeholder = 'mm/dd/yyyy'
         date.value = dateValue
         const dateLabel = document.createElement('label')
         dateLabel.innerHTML = 'Date'
