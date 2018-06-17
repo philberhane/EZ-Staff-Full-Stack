@@ -16,7 +16,7 @@ var LocalStrategy = require('Strategy');
 var nodemailer = require('nodemailer');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/loginapp');
+mongoose.connect(process.env.MONGODB_URI);
 var db = mongoose.connection;
 
 var routes = require('./routes/index');
