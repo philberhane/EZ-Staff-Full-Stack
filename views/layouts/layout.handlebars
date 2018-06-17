@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>Event Staffing Software</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/bootstrap.css" />
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
@@ -15,19 +17,74 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<script>
+        /* Open when someone clicks on the span element */
+function openNav() {
+    document.getElementById("myNav").style.height = "100%";
+}
+
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+    document.getElementById("myNav").style.height = "0%";
+}</script>
 	<div class="container">
       <div class="headerTho clearfix">
         <nav>
-          <ul class="nav nav-pills pull-right">
+          
             {{#if user}}
-             <li role="presentation" id="plansLi"></li>
+            
+            <ul id="mainNav" class="nav nav-pills pull-right"> 
               <li id="dashboard" role="presentation"><a id="activeNav" href="/users/admin">Dashboard</a></li>
+              <li role="presentation" id="plansLi"></li>
               <li role="presentation"><a href="/users/logout">Logout</a></li>
+            </ul>
+             
+             <ul id="mobileNav" class="pull-right" style="list-style-type: none">
+              <li><a href="#" onclick = "openNav()"><i class="fa fa-bars" style="font-size:24px;color:#4EBBDB"></i></a></li>
+            </ul>
+              
+                <div id="myNav" class="overlay">
+                  <a href="javascript:void(0)" class="closebtn pull-right" style="font-size: 38px; color: white; margin-right: 40px; margin-top: 10px" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+             
+
+    <a href="#" style="color: white" id="plansLi2"></a>
+    <hr width="75%;" align="left" size="0">
+    <a href="/users/admin" style="color: white">Dashboard</a>
+    <hr width="75%;" align="left" size="0">
+    <a href="/users/logout" style="color: white">Logout</a>
+    <hr width="75%;" align="left" size="0">
+                   
+                   
+                    </div>
+              </div>
+              
+              
             {{else}}
+             <ul id="mainNav" class="nav nav-pills pull-right">
               <li role="presentation"><a href="/users/login">Login</a></li>
               <li role="presentation"><a href="/users/register">Sign Up</a></li>
+              </ul>
+              
+              <ul id="mobileNav" class="pull-right" style="list-style-type: none">
+              <li><a href="#" onclick = "openNav()"><i class="fa fa-bars" style="font-size:24px;color:#4EBBDB"></i></a></li>
+            </ul>
+              
+                <div id="myNav" class="overlay">
+                  <a href="javascript:void(0)" class="closebtn pull-right" style="font-size: 38px; color: white; margin-right: 40px; margin-top: 10px" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+               <a href="/users/login" style="color: white">Login</a>
+    <hr width="75%;" align="left" size="0">
+    <a href="/users/register" style="color: white">Signup</a>
+    <hr width="75%;" align="left" size="0">
+
+                    </div>
+                
+              </div>
+              
+              
+              
             {{/if}}
-          </ul>
         </nav>
         <a class="navbar-brand"  href="/users/admin"><img src="/images/imageedit_6_9701024636.png" class= "img-responsive" style="height: 100%"></a>
       </div>

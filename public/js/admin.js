@@ -47,12 +47,16 @@ var form = document.getElementById('payment-form');
 
 
 var plansLi = document.getElementById('plansLi')
+var plansLi2 = document.getElementById('plansLi2')
 var plansButton = document.createElement('a')
 plansButton.innerText = 'Plans'
 plansButton.id = "plansButton"
 plansButton.setAttribute("onclick", "displayPlans()")
 plansButton.setAttribute("href", "#")
 plansLi.appendChild(plansButton)
+
+plansLi2.setAttribute("onclick", "displayPlans(); closeNav()")
+plansLi2.innerText = 'Plans'
 
 
 function displayPlans() {
