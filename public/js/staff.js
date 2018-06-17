@@ -1,6 +1,6 @@
 // Initializes the Google Maps API. In order to use it's 'calculate distance' function, I needed to have an actual map on the page. And so, I did that, and just
 //made the map hidden.
- const initMap = () => {
+ function initMap() {
         const map = new google.maps.Map(document.getElementById('map'), {
           zoom: 8,
           center: {lat: -34.397, lng: 150.644}
