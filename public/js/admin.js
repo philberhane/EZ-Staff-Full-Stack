@@ -1242,7 +1242,7 @@ function removeStaffPopup(clicked_id) {
     
          for (j = 6; j < selectedAreaUl.children.length-1; j++) {
             var liLoop = document.createElement('li')
-            liLoop.innerText = selectedAreaUl.children[j].innerText.replace('Remove','')
+            liLoop.innerText = selectedAreaUl.children[j].innerText.replace('x','')
              hiddenElement.appendChild(liLoop)
          }
     
