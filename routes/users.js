@@ -12,31 +12,6 @@ router.get('/register', function (req, res) {
 });
 
 
-/*router.get('/:id', function(req, res) {
-    User.findOne({ '_id': req.params.id },  (err, urlObject) => {
-            if (err) {
-                return handleError(err);
-            }
-            
-            if (urlObject.verified === 'no') {
-                
-                if (urlObject.role === 'admin') {
-                    
-                }
-                
-                
-                
-                
-            } else {
-                res.status(500).send({
-			message: 'Error: This user is already verified!'
-		});
-            }
-            
-        })
-    
-})*/
-
 // Register for Staff Members
 router.get('/staffRegister', function (req, res) {
 	res.render('staffRegister');
