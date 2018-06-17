@@ -43,7 +43,7 @@ card.addEventListener('change', function(event) {
 // Handle form submission.
 var form = document.getElementById('payment-form');
 
-document.getElementById('dashboard').setAttribute("href", "/users/admin")
+document.querySelector('.dashboard').setAttribute("href", "/users/admin")
 document.getElementById('dashboard2').setAttribute("href", "/users/admin")
 document.getElementById('logo').setAttribute("href", "/users/admin")
 

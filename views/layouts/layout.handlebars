@@ -34,7 +34,7 @@ function closeNav() {
             {{#if user}}
             
             <ul id="mainNav" class="nav nav-pills pull-right"> 
-              <li id="dashboard" role="presentation"><a id="activeNav" >Dashboard</a></li>
+              <li role="presentation"><a class="dashboard" id="activeNav" >Dashboard</a></li>
               <li role="presentation" id="plansLi"></li>
               <li role="presentation"><a href="/users/logout">Logout</a></li>
             </ul>
@@ -45,8 +45,9 @@ function closeNav() {
               
                 <div id="myNav" class="overlay">
                   <a href="javascript:void(0)" class="closebtn pull-right" style="font-size: 38px; color: white; margin-right: 40px; margin-top: 10px" onclick="closeNav()">&times;</a>
-  <div class="overlay-content">
-             
+  
+    
+        <div class="overlay-content">
 
     <a href="#" style="color: white" id="plansLi2"></a>
     <hr width="75%;" align="left" size="0">
