@@ -13,8 +13,8 @@ router.get('/register', function (req, res) {
 
 
 // Register for Staff Members
-router.get('/staffRegister', function (req, res) {
-	res.render('staffRegister');
+router.get('/registerStaff', function (req, res) {
+	res.render('registerStaff');
 });
 
 // Login
