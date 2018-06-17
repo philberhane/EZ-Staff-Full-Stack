@@ -10,7 +10,7 @@ const staffRegister = () => {
     
     
 
-    fetch('http://localhost:3000/users/staffRegister', {
+    fetch('https://ezstaff.herokuapp.com/users/staffRegister', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { "Content-Type": "application/json"}
