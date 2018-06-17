@@ -1493,6 +1493,7 @@ function smallPlan() {
     
     span.onclick = function() {
     modal.style.display = "none";
+        card.clear()
 }
    
 
@@ -1500,6 +1501,7 @@ function smallPlan() {
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        card.clear()
     }
 }
 
@@ -1530,6 +1532,7 @@ function mediumPlan() {
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        card.clear()
     }
 }
 
@@ -1551,6 +1554,7 @@ function enterprisePlan() {
     
     span.onclick = function() {
     modal.style.display = "none";
+        card.clear()
 }
    
 
@@ -1558,6 +1562,7 @@ function enterprisePlan() {
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        card.clear()
     }
 }
 
@@ -1573,7 +1578,6 @@ function beginMembership() {
     var plan = document.getElementById('upgradePlanValue').value
     var previousPlan = document.getElementById('hiddenPlan').value
     var email = document.getElementById('hiddenEmail').value
-    console.log(email)
     
     var name = document.getElementById('stripeName').value
     
@@ -1661,6 +1665,7 @@ function updateCardPopup() {
     
     span.onclick = function() {
     modal.style.display = "none";
+        card.clear()
 }
    
 
@@ -1668,6 +1673,7 @@ function updateCardPopup() {
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        card.clear()
     }
 }
 
