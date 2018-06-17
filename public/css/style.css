@@ -8,9 +8,7 @@ body {
     color: white;
 }
 
-#map {
-    display: none;
-}
+
 
 #createeventbutton:hover {
     color: white;
