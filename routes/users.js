@@ -234,7 +234,7 @@ var mailOptions = {
   from: process.env.EMAIL,
   to: recipient,
   subject: "You've been invited to EZ Staff",
-  html: '<p>EZ Staff is the leading Event Staffing Software. Click <a href="http:/localhost:3000/staffsignup">here</a> to get started!</p>'
+  html: '<p>EZ Staff is the leading Event Staffing Software. Click <a href="https://ezstaff.herokuapp.com/users/registerStaff">here</a> to get started!</p>'
 };
     
 //Insert field checks

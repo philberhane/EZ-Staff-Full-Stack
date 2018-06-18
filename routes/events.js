@@ -74,7 +74,7 @@ var mailOptions = {
   from: process.env.EMAIL,
   to: emailArray,
   subject: "An Event has been created!",
-  html: '<p>A new event has been added and is ready for staff members!. Click <a href="http:/localhost:3000/users/login">here</a> to sign in and accept the event!</p>'
+  html: '<p>A new event has been added and is ready for staff members!. Click <a href="https://ezstaff.herokuapp.com/users/login">here</a> to sign in and accept the event!</p>'
 };
         transporter.sendMail(mailOptions, function(error, info){
   if (error) {
@@ -228,7 +228,7 @@ var mailOptions = {
   from: process.env.EMAIL,
   to: emailArray,
   subject: "A Staff Member has cancelled an event!",
-  html: '<p>This means that, if you are a staff member, an event is available to accept. Click <a href="http:/localhost:3000/users/login">here</a> to sign in and accept the event!</p>'
+  html: '<p>This means that, if you are a staff member, an event is available to accept. Click <a href="https://ezstaff.herokuapp.com/users/login">here</a> to sign in and accept the event!</p>'
 };
         transporter.sendMail(mailOptions, function(error, info){
   if (error) {
@@ -267,7 +267,7 @@ var mailOptions = {
   from: process.env.EMAIL,
   to: adminUser.email,
   subject: "An Event has been accepted!",
-  html: '<p>A staff member has accepted an event!. Click <a href="http:/localhost:3000/users/login">here</a> to sign in and see who is currently staffed!</p>'
+  html: '<p>A staff member has accepted an event!. Click <a href="https://ezstaff.herokuapp.com/users/login">here</a> to sign in and see who is currently staffed!</p>'
 };
         transporter.sendMail(mailOptions, function(error, info){
   if (error) {
