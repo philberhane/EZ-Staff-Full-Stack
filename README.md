@@ -1,3 +1,5 @@
+http://ezstaff.co
+
 # EZ Staff - A Full Stack Web Application for effortless Event Staffing
 
 ## Purpose - Doesn't an EZ-Staff repo already exist?
